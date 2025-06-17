@@ -48,6 +48,7 @@ function deleteTodo(idx) {
     todos.splice(idx, 1);
     saveTodos(todos);
     renderTodos();
+    alert('you want to delete it ?');
 }
 
 form.addEventListener('submit', e => {
