@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Lint') {
             steps {
-                // You can add a linter such as eslint if you install Node.js
                 echo 'No linter configured for pure JS/HTML project'
             }
         }
@@ -18,14 +17,15 @@ pipeline {
                 echo 'Copy files to your web server or deploy to GitHub Pages'
             }
         }
-
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube-local') {
-                    sh 'sonar-scanner'
+                    script {
+                        def scannerHome = tool 'sonar-scanner'
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
-
     }
 }
