@@ -18,5 +18,14 @@ pipeline {
                 echo 'Copy files to your web server or deploy to GitHub Pages'
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube-local') {
+                    bat 'sonar-scanner'
+                }
+            }
+        }
+
     }
 }
